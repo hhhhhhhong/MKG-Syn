@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # mkg_syn
 
 `mkg_syn` is a multi-modal knowledge graph model for drug combination synergy prediction. It uses drug pairs, cell lines, knowledge graph information, SMILES features, text embeddings, and gene expression features to predict whether a drug combination is synergistic.
@@ -219,11 +218,4 @@ outputs/
 checkpoints/
 ```
 
-## Notes
 
-- Keep large generated files out of GitHub: `models/`, `*.pt`, `checkpoints/`, `outputs/`, `wandb/`.
-- If datasets or embeddings cannot be redistributed, provide download or generation instructions instead.
-- Add a `LICENSE` file before public release.
-=======
-# MKG-Syn
->>>>>>> f8e258de18290a4691325b203d899eccc8417238
