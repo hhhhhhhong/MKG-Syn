@@ -1,0 +1,71 @@
+defaults:
+  - _self_
+
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+wandb:
+  project: "mkg_syn"
+  entity: null
+  name: "mkg_syn"
+  mode: "disabled"
+
+paths:
+  root: "${hydra:runtime.cwd}/data_set"
+  rec_path: "${paths.root}/DrugCombDB/comb_final.txt"
+  kg_path: "${paths.root}/DrugCombDB/kg_final2.txt"
+  smiles_csv: "${paths.root}/DrugCombDB/smiles_completed.csv"
+  save_dir: "${hydra:runtime.cwd}/checkpoints/${now:%Y-%m-%d}/${now:%H-%M-%S}"
+  drug_emb: "${hydra:runtime.cwd}/saved_features/drug_global_embeddings.pt"
+  cell_emb: "${hydra:runtime.cwd}/saved_features/cell_global_embeddings.pt"
+  chemberta_dir: "${hydra:runtime.cwd}/models/ChemBERTa-77M-MLM"
+  cell_gene_path: "${paths.root}/DrugCombDB/ccle_cell_gene.csv"
+
+training:
+  seed: 42
+  n_epochs: 1000
+  batch_size: 256
+  lr: 0.0001
+  l2_weight: 1e-5
+  patience: 10
+  cv_mode: 1
+  holdout_test_size: 0.1
+  early_stop_metric: auc
+  n_folds: 5
+  test_size: 0.2
+  selection_metric: "auc"
+  threshold_metric: "accuracy"
+  threshold_steps: 1001
+  scheduler_metric: "auc"
+  scheduler_patience: 6
+  scheduler_factor: 0.5
+  cl_alpha: 0.01
+  contrastive_tau: 0.07
+  aux_loss_weight: 0.15
+  grad_clip_norm: 5.0
+  focal_alpha: 0.5
+  focal_gamma: 1.5
+  ranking_margin: 0.2
+  ranking_temperature: 1.0
+  ranking_loss_weight: 0.25
+  consistency_loss_weight: 0.15
+  diversity_loss_weight: 0.05
+  diversity_target: 0.0
+
+model:
+  n_neighbors: 12
+  e_dim: 128
+  r_dim: 128
+  kg_heads: 4
+  kg_layers: 3
+  kg_dropout: 0.30
+  kg_emb_dropout: 0.30
+  cl_rate: 0.001
+  cl_tau: 0.20
+  fusion_dropout: 0.15
+  pred_dropout: 0.20
+  attn_dropout: 0.10
+  attn_heads: 4
+  use_smiles: true
+  use_cls: true
