@@ -71,7 +71,7 @@ data_set/
 |   |-- smiles_completed.csv
 |   `-- cell_gene.csv
 `-- DrugCombDB/
-    |-- comb_final_filtered.txt
+    |-- comb_final.txt
     |-- kg_final2.txt
     |-- smiles_completed.csv
     `-- ccle_cell_gene.csv
@@ -159,7 +159,7 @@ Train on DrugCombDB:
 python train.py --config-name config_db
 ```
 
-Before running DrugCombDB training, make sure `data_set/DrugCombDB/comb_final_filtered.txt` exists. The `subgragh/` scripts generate text embeddings only; they do not generate the training label file.
+Before running DrugCombDB training, make sure `data_set/DrugCombDB/comb_final.txt` exists. The `subgragh/` scripts generate text embeddings only; they do not generate the training label file.
 
 Select GPU from the command line:
 
